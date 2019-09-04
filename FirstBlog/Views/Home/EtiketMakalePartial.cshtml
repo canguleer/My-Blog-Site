@@ -1,0 +1,14 @@
+﻿@model IEnumerable<FirstBlog.Models.Etiket>
+@{
+	ViewBag.Title = "EtiketMakalePartial";
+	Layout = null;
+}
+	
+
+
+
+	@foreach (var item in Model)
+	{
+		<a href="/Home/MakaleDetay/@item.MakaleId" rel="tag">@item.Makale.Etiket.Select(m=>m.EtiketAdi).FirstOrDefault()</a>
+	}
+		

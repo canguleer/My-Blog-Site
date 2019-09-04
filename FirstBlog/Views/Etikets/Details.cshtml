@@ -1,0 +1,35 @@
+﻿@model FirstBlog.Models.Etiket
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Etiket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EtiketAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EtiketAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Makale.Baslık)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Makale.Baslık)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EtiketId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

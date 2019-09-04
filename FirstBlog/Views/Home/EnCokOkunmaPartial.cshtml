@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FirstBlog.Models.Makale>
+@{
+	ViewBag.Title = "EnCokOkunmaPartial";
+	Layout = null;
+}
+
+
+<div class="row">
+  
+	@foreach (var item in Model.OrderByDescending(m => m.Okunma).Take(4))
+	{
+		<div class="col-lg-3 col-sm-6">
+			<a class="popular-post" href="/Home/MakaleDetay/@item.MakaleId">
+				<img style="height:175px; width:262px;"  src="@item.Foto" alt="@item.Baslık " class="img-fluid">
+
+				<div class="post-content">
+					<h4 class="ptitle" id="okunma"> @item.Baslık  (@item.Okunma)</h4>
+				</div>
+			</a>
+
+			@if (item.Icerik.Length > 120)
+			{
+				<p class="text-muted">@Html.Raw(item.Icerik.Substring(0, 120)) ...</p>
+			}
+			else
+			{
+				<p class="text-muted">@Html.Raw(item.Icerik)...</p>
+			}
+
+
+
+		</div>
+
+
+	}
+</div>

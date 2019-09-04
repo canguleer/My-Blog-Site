@@ -1,0 +1,27 @@
+﻿@model IEnumerable<FirstBlog.Models.Makale>
+@{
+	ViewBag.Title = "SonYayınlananlarPartial";
+	Layout = null;
+}
+
+<div class="sidebar-block latest-post">
+	<h4 class="sidebar-title">Son Yayınlananlar</h4>
+	<ol class="list-unstyled">
+		@foreach (var item in Model.Take(5))
+		{
+			<li>
+				<a href="/Home/MakaleDetay/@item.MakaleId">
+					<div class="rpost-img">
+						<img src="@item.Foto" alt="@item.Baslık" class="img-fluid">
+					</div>
+					<h5>@item.Baslık</h5>
+					<p class="text-muted">@string.Format("{0: dd MMMM yyyy}", item.Tarih)</p>
+				</a>
+			</li>
+		}
+
+	</ol>
+</div>
+
+
+

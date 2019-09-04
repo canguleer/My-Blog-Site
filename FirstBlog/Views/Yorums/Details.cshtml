@@ -1,0 +1,51 @@
+﻿@model FirstBlog.Models.Yorum
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Yorum</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Icerik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Icerik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Makale.Baslık)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Makale.Baslık)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Uye.KullaniciAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uye.KullaniciAdi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.YorumId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

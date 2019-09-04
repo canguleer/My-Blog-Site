@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FirstBlog.Models.Etiket>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container pb-5">
+	<h2 style="text-align:center;">Etiketler</h2>
+
+	<p>
+		@Html.ActionLink("Yeni Etiket", "Create")
+	</p>
+	<table class="table table-striped table-bordered">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.EtiketAdi)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Makale.Baslık)
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.EtiketAdi)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Makale.Baslık)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.EtiketId }) |
+					@Html.ActionLink("Details", "Details", new { id = item.EtiketId }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.EtiketId })
+				</td>
+			</tr>
+		}
+
+	</table>
+</div>

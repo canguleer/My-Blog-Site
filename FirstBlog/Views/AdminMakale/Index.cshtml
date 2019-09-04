@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FirstBlog.Models.Makale>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container" pb-5>
+	<h2 style="text-align:center;">Makaleler</h2>
+
+	<p>
+		@Html.ActionLink("Yeni Makale", "Create",null, new { @class = "btn btn-primary" })
+	</p>
+	<table class="table table-striped table-bordered">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Baslık)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Icerik)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Foto)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Tarih)
+			</th>
+			
+
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Baslık)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Icerik)
+			</td>
+			<td>
+				<img width="75"  height="80" src="@item.Foto" />
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Tarih)
+			</td>
+			
+
+			<td>
+				@Html.ActionLink("Düzenle", "Edit", new { id = item.MakaleId }, new { @class = "btn btn-success" })
+
+				<a class="btn btn-danger" href="@Url.Action("Delete","AdminMakale", new { id = item.MakaleId})">Sil</a>
+			</td>
+		</tr>
+		}
+
+	</table>
+</div>

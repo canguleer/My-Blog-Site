@@ -1,0 +1,256 @@
+﻿@model FirstBlog.Models.Makale
+
+@{
+    ViewBag.Title = "MakaleDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header jumbotron p-3 p-md-5 text-white">
+    <div class="dark-overlay"></div>
+    <div class="container">
+        <div class="col-md-6 px-0 mx-auto ">
+            <div class="text-center page-banner-coontent">
+                <h2>@Model.Baslık </h2>
+                <p>Eum perspiciatis Ipsa explicabo rerum veritatis repellat atque id quidem cumque et temporibus eaque.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-8 blog-main col-sm-7">
+            <div class="blog-post text-center blog-post-single">
+                <div class="blog-block-img">
+                    <img style="height:500px; width:750px;" src="@Model.Foto" alt="@Model.Baslık" class="img-fluid">
+                </div>
+                <p class="blog-post-cat">
+                    @Model.Etiket.Select(m => m.EtiketAdi).FirstOrDefault()
+                </p>
+                <p class="blog-post-cat" style="background-color:darkred"> Okunma Sayısı @Model.Okunma </p>
+
+
+                <a href="#">
+                    <h2 class="blog-post-title">@Model.Baslık </h2>
+                </a>
+
+                <p class="blog-post-meta"> <img src="~/Content/assets/images/blog/widget-2.jpg" alt="" class="img-fluid small">@string.Format("{0: dd MMMM yyyy}", Model.Tarih) by  <a href="/Uye/Index/@Model.UyeId"> @Model.Uye.AdSoyad</a> @Model.Kategori.KategoriAdi (@Model.Kategori.Makale.Count())</p>
+
+                <p>@Html.Raw(Model.Icerik)</p>
+
+                <div class="single-tags tagcloud">
+                    <a href="#" rel="tag">@Model.Etiket.Select(m => m.EtiketAdi).FirstOrDefault()</a>
+
+                </div>
+            </div>
+            <!-- /.blog-post -->
+            <div class="clearfix"></div>
+            <!--    author-area    -->
+
+            <div class="author-area">
+                @foreach (var item in Model.Yorum)
+                {
+                    <div class="author-img">
+                        <a href="#">
+                            <span class=""><img alt="" src="@item.Makale.Uye.Foto"></span>
+                        </a>
+                    </div>
+                    <div class="author-info">
+                        <h4 class="upper">
+                            <a href="#">@item.Makale.Uye.AdSoyad</a>
+                        </h4>
+                        <p>
+                            @item.Icerik
+                            @if (Convert.ToInt32(Session["uyeid"]) == item.UyeId)
+                            {
+                                <a class="btn btn-danger" href="/Home/YorumSil">Sil</a>
+                            }
+                        </p>
+                        <small>@item.Tarih</small>
+
+                    </div>
+                }
+            </div>
+            <!-- COMMENT SECTION  -->
+            <div class="comment" id="respond">
+                <div class="section-header">
+                    <h3>Yorum Yap</h3>
+                    <hr>
+                </div>
+
+                <form action="@Url.Action("YorumYap", "Home")" method="post" class="comment-form">
+                    <input type="hidden" name="makaleid" value="@Model.MakaleId" />
+                    <p class="comment-form-comment">
+                        <label for="comment">Yorum</label>
+                        <textarea name="yorum" cols="45" rows="5" required="required" style="width:100%"></textarea>
+                    </p>
+
+                    <p class="form-submit">
+                        <button type="submit" id="gonder" name="gonder" class="btn btn-sm btn-dark">Gönder</button>
+                    </p>
+                </form>
+            </div>
+            <!--  COMMENT SECTION  END -->
+        </div>
+        <!-- /.blog-main -->
+        <!-- blog-main SIDEBAR RIGHT -->
+        <aside class="col-md-4 blog-sidebar col-sm-5">
+            <div class="p-3 mb-3 bg-light rounded text-center">
+                @Html.Partial("BlogAraView")
+            </div>
+            <div class="p-3 mb-3 bg-light rounded text-center">
+                <div class="sidebar-about">
+                    <div class="about-img">
+                        <a href="/Home/Hakkımda">
+                            <img width="75" src="~/Content/assets/images/IMG_4975.JPG" alt="" class="img-fluid rounded-circle">
+                        </a>
+                    </div>
+
+                    <a href="/Home/Hakkımda"><h4 class="py-2">Merhaba! Ben Can :)</h4></a>
+                    <a href="@Url.Action("Hakkımda","Home")"><p class="mb-3">Sayfama Hoşgeldiniz <em>Benim hakkımda detaylı bilgi sahibi olmak istiyorsanız lütfen menüdeki "Hakkımda" kısmını okuyunuz.</em></p></a>
+                    <ul class="list-inline social-link">
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="py-3">
+                @{
+                    Html.RenderAction("KategoriPartial", "Home");
+                }
+            </div>
+            <div class="py-3">
+                @{
+                    Html.RenderAction("SonYayınlananlarPartial", "Home");
+
+                }
+            </div>
+
+            <div class="py-3">
+                <div class="sidebar-block instagram">
+                    <h4 class="sidebar-title">Instagram</h4>
+                    <div class="instgram-posts">
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-1.jpg" alt="" class="img-fluid"></a>
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-2.jpg" alt="" class="img-fluid"></a>
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-3.jpg" alt="" class="img-fluid"></a>
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-4.jpg" alt="" class="img-fluid"></a>
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-1.jpg" alt="" class="img-fluid"></a>
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-2.jpg" alt="" class="img-fluid"></a>
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-3.jpg" alt="" class="img-fluid"></a>
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-4.jpg" alt="" class="img-fluid"></a>
+                        <a href="#"><img src="~/Content/assets/images/blog/widget-1.jpg" alt="" class="img-fluid"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="py-3">
+                @{
+                    Html.RenderAction("EtiketPartial", "Home");
+
+                }
+            </div>
+            <div class="py-3">
+                <div class="bg-light text-center subscribe">
+                    <h4 class="sidebar-title">Subscribe Now</h4>
+                    <p class="text-muted">Subscribe For latest Newsletter</p>
+                    <form action="#">
+                        <input type="text" class="form-control" placeholder="Type Your Email here">
+                        <a href="#" class="btn btn-sm  btn-danger btn-rounded">Subscribe</a>
+                    </form>
+                    <p class="font-italic">Don't worry ! We don't spam</p>
+                </div>
+            </div>
+        </aside>
+        <!-- /.blog-sidebar -->
+    </div>
+    <!-- /.row -->
+</main>
+<!-- /.container -->
+<div class="popular-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="post-header border-bottom text-center">
+                    <h3 class="">En Çok Okunanlar</h3>
+                    <p>Aşağıda kullanıcılar tarafından en çok okunan makaleler yer almaktadır.İlginizi çeken bir başlık varsa sen neyi bekliyorsun.Haydi oku ve öğren..</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @{
+                Html.RenderAction("EnCokOkunmaPartial", "Home");
+            }
+        </div>
+    </div>
+</div>
+}
+
+
+
+
+
+
+
+
+
+@section scripts{
+    <script>
+			$("#gonder").click(function (e) {
+					debugger
+						e.preventDefault();
+						var yorumunuz = $('#yorum').val();
+
+						if (yorumunuz == "") {
+							alert("Lütfen makale yorumunuzu giriniz.");
+							return;
+				}
+				$.post('@Url.Action("YorumYap", "Home")', { 'yorum': yorumunuz, 'makaleid': '@Model.MakaleId' }, function (result) {
+					alert(data);
+				});
+            });
+    </script>
+
+
+
+    @*<script>
+            $('button[name=gonder]').on("click", function (e) {
+                e.preventDefault();
+                var yorum = $('textarea[name=yorum]').val();
+                if (yorum == null) {
+                    alert("lütfen boş alan bırakmayınız!!!");
+                    return;
+
+                }
+                $.post('@Url.Action("YorumYap","Home")', { 'yorum': yorum, 'makaleid':@Model.MakaleId}, function () {
+
+                    alert(data);
+                });
+
+            });
+        </script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Home/OkunmaArttir',
+                data: { Makaleid:@Model.MakaleId},
+                type: 'POST',
+            });
+
+        });
+
+    </script>
+}
+
+
+
+
+<script>
+    $(document).ready(function () {
+
+
+
+    })
+
+</script>

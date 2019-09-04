@@ -1,0 +1,84 @@
+﻿
+@{
+	ViewBag.Title = "login";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Redial</title>
+	<link rel="icon" href="dist/images/favicon.ico" />
+	<!--Plugin CSS-->
+	<link href="http://localhost:4356/Content_Log/css/plugins.min.css" rel="stylesheet" />
+	<!--main Css-->
+	<link href="http://localhost:4356/Content_Log/css/main.min.css" rel="stylesheet" />
+</head>
+<body>
+	<!-- main-content-->
+	<div class="wrapper" style="margin-bottom:100px;">
+		<div class="w-100">
+			<div class="row d-flex justify-content-center  pt-5 mt-5">
+				<div class="col-12 col-xl-4">
+					<div class="card">
+						<div class="card-body text-center">
+							<h4 class="mb-0 redial-font-weight-400">Giriş Yap</h4>
+						</div>
+						<div class="redial-divider"></div>
+						<div class="card-body py-4 text-center">
+
+
+
+							<form id="formkayit" action="~/Home/Giris_Yap" method="post">
+								@Html.AntiForgeryToken()
+								<div class="form-group">
+									<input type="text" class="form-control" name="KullaniciAdi" placeholder="AdSoyad " />
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control"  name="Sifre" placeholder="Şifre" />
+								</div>
+								<div class="form-group text-left">
+									<input type="checkbox" id="checkbox11">
+									<label for="checkbox11">Remember Me</label>
+								</div>
+								<div class="form-layout-submit">
+									<button id="Kaydet" type="submit" class="btn btn-primary btn-md redial-rounded-circle-50 btn-block">Giriş</button>
+								</div>
+								<h4 class="mb-0 redial-font-weight-400" style="font-size:12px; padding-top:13px;">Bir hesabınız yok mu?</h4>
+								<a href="@Url.Action("Kayıt_Ol","Home")" style="text-align:right;">Kayıt Ol</a>
+							</form>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End main-content-->
+	<!-- jQuery -->
+	<script src="http://localhost:4356/Content_Log/js/plugins.min.js"></script>
+	<script src="http://localhost:4356/Content_Log/js/common.js"></script>
+</body>
+</html>
+
+<script>
+	$('#Kaydet').on('click', function () {
+
+		var AdSoyad = $('input[name=AdSoyad]').val();
+		var Sifre = $('input[name=Sifre]').val();
+
+		if (AdSoyad == "" || Sifre == "") {
+
+			alert("Lütfen boş alan bırakmayınız!");
+			return;
+		}
+		$('#formkayit').submit();
+	});
+</script>
+

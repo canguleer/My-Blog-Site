@@ -1,0 +1,19 @@
+﻿@model IEnumerable<FirstBlog.Models.Etiket>
+@{
+	ViewBag.Title = "EtiketPartial";
+	Layout = null;
+}
+
+
+<div class="">
+	<h4 class="sidebar-title">Etiketler</h4>
+	<div class="list-unstyled mb-0 tags-cloud">
+		@foreach (var item in Model)
+		{
+			<a href="/Home/MakaleDetay/@item.MakaleId">@item.Makale.Etiket.Select(m => m.EtiketAdi).FirstOrDefault()</a>
+		}
+
+
+	</div>
+</div>
+

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FirstBlog.Models.Kategori>
+
+@{
+	ViewBag.Title = "KategoriPartial";
+	Layout = null;
+}
+
+
+<div class="sidebar-block">
+	<h4 class="sidebar-title">Kategoriler</h4>
+
+	@foreach (var item in Model)
+	{
+	<ol class="list-unstyled mb-0">
+		<li>
+			<a href="/KategoriListeleme/Index/@item.KategoriId">@item.KategoriAdi (@item.Makale.Count())</a>
+		</li>
+	</ol>
+	}
+
+</div>
+
+
+
+
+@*<h2>KategoriPartial</h2>
+
+	<p>
+		@Html.ActionLink("Create New", "Create")
+	</p>
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.KategoriAdi)
+			</th>
+			<th></th>
+		</tr>
+
+	@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.KategoriAdi)
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id=item.KategoriId }) |
+				@Html.ActionLink("Details", "Details", new { id=item.KategoriId }) |
+				@Html.ActionLink("Delete", "Delete", new { id=item.KategoriId })
+			</td>
+		</tr>
+	}
+
+	</table>*@
+
+

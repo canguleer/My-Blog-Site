@@ -1,0 +1,152 @@
+﻿@model IEnumerable<FirstBlog.Models.Makale>
+
+@{
+	ViewBag.Title = "BlogAra";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main class="container">
+	<div class="row">
+		<div class="col-md-8 blog-main col-sm-7">
+			<h2 style="text-align:center; margin-top:30px;">Aradığınız İçerikteki Makaleler</h2>
+
+
+			<table class="table table-striped table-bordered" style="margin-top:30px;">
+				<tr>
+
+
+					<th>
+						@Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Uye.KullaniciAdi)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Baslık)
+					</th>
+
+					<th>
+						@Html.DisplayNameFor(model => model.Foto)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Tarih)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Okunma)
+					</th>
+
+
+
+				</tr>
+
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Uye.KullaniciAdi)
+						</td>
+						<td>
+							<a href="/Home/MakaleDetay/@item.MakaleId">@Html.DisplayFor(modelItem => item.Baslık)</a>
+						</td>
+
+						<td>
+							<img width="75" src="@item.Foto" alt="@item.Baslık" />
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Tarih)
+						</td>
+
+						<td>
+							@Html.DisplayFor(modelItem => item.Okunma)
+						</td>
+
+
+					</tr>
+				}
+
+			</table>
+		</div>
+		<aside class="col-md-4 blog-sidebar col-sm-5">
+
+			<div class="p-3 mb-3 bg-light rounded text-center" style="margin-top:97px;">
+				@Html.Partial("BlogAraView")
+			</div>
+
+			<div class="p-3 mb-3 bg-light rounded text-center">
+				<div class="sidebar-about">
+					<div class="about-img">
+						<a href="/Home/Hakkımda">
+							<img width="75" src="~/Content/assets/images/IMG_4975.JPG" alt="" class="img-fluid rounded-circle">
+						</a>
+					</div>
+
+					<a href="/Home/Hakkımda"><h4 class="py-2">Merhaba! Ben Can :)</h4></a>
+					<a href="@Url.Action("Hakkımda","Home")"><p class="mb-3">Sayfama Hoşgeldiniz <em>Benim hakkımda detaylı bilgi sahibi olmak istiyorsanız lütfen menüdeki "Hakkımda" kısmını okuyunuz.</em></p></a>
+					<ul class="list-inline social-link">
+						<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fa fa-rss"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="py-3">
+				@{
+
+					Html.RenderAction("KategoriPartial", "Home");
+				}
+
+			</div>
+			<div class="py-3">
+
+				@{
+					Html.RenderAction("EtiketPartial", "Home");
+
+				}
+
+			</div>
+			<div class="py-3">
+
+				@{
+					Html.RenderAction("SonYayınlananlarPartial", "Home");
+
+				}
+
+			</div>
+
+		
+		</aside>
+
+
+
+
+
+
+	</div>
+
+	<main/>
+	<div class="popular-wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 mx-auto">
+					<div class="post-header border-bottom text-center">
+						<h3 class="">En Çok Okunanlar</h3>
+						<p>Aşağıda kullanıcılar tarafından en çok okunan makaleler yer almaktadır.İlginizi çeken bir başlık varsa sen neyi bekliyorsun.Haydi oku ve öğren..</p>
+					</div>
+				</div>
+			</div>
+
+
+			@{
+
+				Html.RenderAction("EnCokOkunmaPartial", "Home");
+			}
+
+		</div>
+	</div>
+
+

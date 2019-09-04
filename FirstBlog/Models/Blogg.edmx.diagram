@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="519cec896545419bb5313027e93c5149" Name="Diagram1">
+        <EntityTypeShape EntityType="BloggModel.Etiket" Width="1.5" PointX="7.5" PointY="2.25" />
+        <EntityTypeShape EntityType="BloggModel.Kategori" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="BloggModel.Makale" PointX="5.25" PointY="1.625" Width="1.5" />
+        <EntityTypeShape EntityType="BloggModel.Uye" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="BloggModel.Yetki" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BloggModel.Yorum" Width="1.5" PointX="7.5" PointY="4.75" />
+        <AssociationConnector Association="BloggModel.FK_Etiket_Makale" />
+        <AssociationConnector Association="BloggModel.FK_Makale_Kategori" />
+        <AssociationConnector Association="BloggModel.FK_Makale_Uye" />
+        <AssociationConnector Association="BloggModel.FK_Yorum_Makale" />
+        <AssociationConnector Association="BloggModel.FK_Uye_Yetki" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
